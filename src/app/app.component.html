@@ -1,28 +1,29 @@
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
 
-  <label for="username">用户名:</label>
-  <input type="text" name="username" id="username" required placeholder="请输入用户名" [(ngModel)]="user.username"
-         #username="ngModel">
-  <span *ngIf="username.errors?.required">请输入用户姓名！</span>
-  <br>
+  <fieldset>
+    <!--用户名输入-->
+    <label for="username">用户名:</label>
+    <input type="text" name="username" id="username" required placeholder="请输入用户名" [(ngModel)]="user.username"
+           #username="ngModel">
+    <span *ngIf="username.errors?.required">请输入用户姓名！</span>
+    <br>
 
-  <label for="password">密码:</label>
-  <input type="password" name="password" id="password" required minlength="6" maxlength="6" placeholder="请用数字键盘输入6位纯数字密码"
-         [(ngModel)]="user.password" #password="ngModel" (keydown)="onKeydownOnlyNumber($event)">
-  <span *ngIf="password.errors?.required">密码不能为空</span>
-  <span *ngIf="password.errors?.minlength">
+  <!--密码输入-->
+    <label for="password">密码:</label>
+    <input type="password" name="password" id="password" required minlength="6" maxlength="6"
+           placeholder="请用数字键盘输入6位纯数字密码"
+           [(ngModel)]="user.password" #password="ngModel" (keydown)="onKeydownOnlyNumber($event)">
+    <span *ngIf="password.errors?.required">密码不能为空</span>
+    <span *ngIf="password.errors?.minlength">
     还差{{password.errors?.minlength.requiredLength-password.errors?.minlength.actualLength}}位
   </span>
-  <span *ngIf="password.valid">
-    输入正确
-  </span>
+    <span *ngIf="password.valid">输入正确</span>
+  </fieldset>
 
 </form>
 
 <br>
-
 <hr>
-
 <p>用户名：{{user.username}}</p>
 <p>密码：{{user.password}}</p>
 <p>校验username：{{username.valid}}</p>
