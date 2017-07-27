@@ -11,7 +11,6 @@ interface User {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // title = 'app';
   user: any = {};
   user1: User = {
     username: 'guanzhanliang',
@@ -20,12 +19,16 @@ export class AppComponent {
     sex: '1',
   }
 
-  onKeyPressOnlyNumber(event: any) {
+  onKeydownOnlyNumber(event: any) {
     let keyCode = event.keyCode;
     if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 8 && keyCode <= 13) || (keyCode >= 96 && keyCode <= 105)) {
       event.returnValue = true;
     } else {
       event.returnValue = false;
     }
+  }
+
+  onSubmit(arg01: any) {
+
   }
 }
