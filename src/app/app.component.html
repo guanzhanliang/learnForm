@@ -1,14 +1,15 @@
+<!--
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
 
   <fieldset>
-    <!--用户名输入-->
+    &lt;!&ndash;用户名输入&ndash;&gt;
     <label for="username">用户名:</label>
     <input type="text" name="username" id="username" required placeholder="请输入用户名" [(ngModel)]="user.username"
            #username="ngModel">
     <span *ngIf="username.errors?.required">请输入用户姓名！</span>
     <br>
 
-  <!--密码输入-->
+  &lt;!&ndash;密码输入&ndash;&gt;
     <label for="password">密码:</label>
     <input type="password" name="password" id="password" required minlength="6" maxlength="6"
            placeholder="请用数字键盘输入6位纯数字密码"
@@ -28,3 +29,25 @@
 <p>密码：{{user.password}}</p>
 <p>校验username：{{username.valid}}</p>
 <p>校验password：{{password.valid}}</p>
+-->
+
+<!--登录表单-->
+<form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
+  <!--用户名-->
+  <label for="username">用户名</label>
+  <input type="text" placeholder="请输入用户名" required name="username" [(ngModel)]="user.username" id="username"
+         #username="ngModel">
+  <span *ngIf="username.errors?.required">用户名不能为空！</span>
+  <span *ngIf="username.valid">输入正确！</span>
+  <br>
+  <!--密码-->
+  <label for="password">密码</label>
+  <input type="password" placeholder="请输入密码" required name="password" [(ngModel)]="user.password" id="password"
+         #password="ngModel" minlength="6" maxlength="6">
+  <span *ngIf="password.errors?.required">密码不能为空！</span>
+  <span *ngIf="password.errors?.minlength">
+    密码长度为{{password.errors?.minlength.requiredLength}}位
+    还差{{password.errors?.minlength.requiredLength-password.errors?.minlength.actualLength}}位
+  </span>
+  <span *ngIf="password.valid">输入正确！</span>
+</form>
