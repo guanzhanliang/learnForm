@@ -33,21 +33,46 @@
 
 <!--登录表单-->
 <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm.value)">
-  <!--用户名-->
-  <label for="username">用户名</label>
-  <input type="text" placeholder="请输入用户名" required name="username" [(ngModel)]="user.username" id="username"
-         #username="ngModel">
-  <span *ngIf="username.errors?.required">用户名不能为空！</span>
-  <span *ngIf="username.valid">输入正确！</span>
-  <br>
-  <!--密码-->
-  <label for="password">密码</label>
-  <input type="password" placeholder="请输入密码" required name="password" [(ngModel)]="user.password" id="password"
-         #password="ngModel" minlength="6" maxlength="6">
-  <span *ngIf="password.errors?.required">密码不能为空！</span>
-  <span *ngIf="password.errors?.minlength">
+  <!--用户基本登录组-->
+  <fieldset ngModelGroup="userLoginBase">
+    <!--用户名-->
+    <label for="userName">用户名</label>
+    <input type="text" placeholder="请输入用户名" required name="userName" [(ngModel)]="user.userName" id="userName"
+           #userName="ngModel">
+    <span *ngIf="userName.errors?.required&&userName.touched">用户名不能为空！</span>
+    <span *ngIf="userName.valid">输入正确！</span>
+    <br>
+
+    <!--密码-->
+    <label for="password">密码</label>
+    <input type="password" placeholder="请输入密码" required name="password" [(ngModel)]="user.password" id="password"
+           #password="ngModel" minlength="6" maxlength="6">
+    <span *ngIf="password.errors?.required&&password.touched">密码不能为空！</span>
+    <span *ngIf="password.errors?.minlength">
     密码长度为{{password.errors?.minlength.requiredLength}}位
     还差{{password.errors?.minlength.requiredLength-password.errors?.minlength.actualLength}}位
   </span>
-  <span *ngIf="password.valid">输入正确！</span>
+    <span *ngIf="password.valid">输入正确！</span>
+    <br>
+
+    <!--单选-->
+    <div *ngFor="let version of versions;">
+      <label [attr.for]="version.display">{{version.display}}</label>
+      <input [attr.id]="version.display" name="version" ngModel required [value]="version.value" type="radio">
+    </div>
+
+    <!--提交-->
+    <button type="submit">提交</button>
+  </fieldset>
+
+  <!--输出表单值json-->
+  <p>loginForm.value|json:</p>
+  <p>{{loginForm.value|json}}</p>
+
+  <!--表单控件状态-->
+  <p>表单控件状态</p>
+  <p>userName.pristine:{{userName.pristine}}</p>
+  <p>userName.dirty:{{userName.dirty}}</p>
+  <p>userName.touch:{{userName.touched}}</p>
+  <p>userName.untouch:{{userName.untouched}}</p>
 </form>

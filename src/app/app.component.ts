@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 interface User {
-  username: string;
+  userName: string;
   password: string;
   age?: number;
   sex?: string;
@@ -12,12 +12,19 @@ interface User {
 })
 export class AppComponent {
   user: any = {};
-  user1: User = {
-    username: 'guanzhanliang',
+ /* user: User = {
+    userName: 'guanzhanliangceshi',
     password: '123123',
     age: 30,
     sex: '1',
-  }
+  }*/
+  versions = [
+    {display:'angular v1',value:1.6},
+    {display:'angular v2',value:2.9},
+    {display:'angular v3',value:3.5},
+    {display:'angular v4',value:4.7}
+  ];
+
 
   onKeydownOnlyNumber(event: any) {
     let keyCode = event.keyCode;
@@ -27,6 +34,15 @@ export class AppComponent {
       event.returnValue = false;
     }
   }
+
+  randomNumber(min,max){
+  let range = max - min;
+  let rand = Math.random();
+  //四舍五入
+  let num = min + Math.round(rand * range);
+  return num;
+}
+
 
   onSubmit(arg01: any) {
 
